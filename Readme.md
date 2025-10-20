@@ -34,3 +34,12 @@ O sistema utiliza listas e dicionários para armazenar os dados em memória:
 | :--- | :--- | :--- |
 | **Usuário** | Dicionário em Lista | `nome`, `data_nascimento`, `cpf` (único, apenas números), `endereco`. |
 | **Conta** | Dicionário em Lista | `agencia` (`0001`), `numero` (sequencial), `usuario` (referência ao objeto usuário), `saldo`, `extrato`, `numero_saques`. |
+
+
+### Persistência e Resolução de Desafios
+
+Embora o código tenha atendido aos requisitos técnicos, a maior dificuldade foi a submissão e o ambiente de trabalho:
+
+    "O verdadeiro desafio foi a configuração do ambiente Git/GitHub no Linux. Encontrei um conflito persistente com o assistente de credenciais do sistema operacional (erro do Firefox), exigindo um reset completo do repositório local e a limpeza manual do cache de credenciais. A superação deste obstáculo garantiu que o projeto fosse enviado corretamente, solidificando o meu conhecimento não apenas em Python, mas também em troubleshooting avançado do fluxo de trabalho Git/Linux."
+
+Este projeto é um excelente demonstrativo da minha capacidade de aplicar conceitos complexos de funções em Python e da minha persistência na resolução de problemas de ambiente.
