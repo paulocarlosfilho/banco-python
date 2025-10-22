@@ -1,0 +1,52 @@
+# Arquivos de sistema e de cache
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.cache
+.project
+.settings
+*.swp
+*.swo
+
+# Arquivos de configuração e temporários do VS Code
+.vscode/
+
+# Arquivos de log e temporários
+*.log
+*.tmp
+temp/
+tmp/
+*.bak
+*.old
+
+# Arquivos de upload e de dados sensíveis
+# Cuidado: Não inclua arquivos que precisam ser versionados.
+uploads/
+/public/uploads/
+
+# Arquivos de banco de dados
+# Ignora arquivos de banco de dados e arquivos de dump.
+*.sql
+*.sqlite
+*.db
+
+# Pastas de dependências de projetos (se usar Node.js ou Composer)
+/node_modules
+/vendor
+
+# Excluir a pasta de cache do Cypress
+cypress/screenshots/
+cypress/videos/
+
+# Excluir arquivos de configuração local
+.env
+settings-store.json
+/venv
+/env
+__pycache__/
+*.pyc
+
+
+
+Pipfile
+Pipfile.lock
