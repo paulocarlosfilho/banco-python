@@ -24,6 +24,6 @@ time.sleep(2)
 
 os.mkdir(ROOT_PATH / 'novo-diretorio')
 
-time.sleep(3)
+time.sleep(2)
 
 shutil.move(ROOT_PATH / "aran.txt", ROOT_PATH / "novo-diretorio/aran.txt")
