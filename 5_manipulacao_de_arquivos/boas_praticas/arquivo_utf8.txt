@@ -1,0 +1,1 @@
+Aprendendo a manipular arquivos com boas práticas utilizando python.
