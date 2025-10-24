@@ -1,0 +1,18 @@
+[2025-10-24 14:38:53] Função 'criar_cliente' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:38:59] Função 'criar_conta' executada com argumentos (1, [<PessoaFisica: ('1234')>], [<ContaCorrente: ('0001', '1', 'Paulo')>]) e {}. Retornou None
+[2025-10-24 14:39:47] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:39:56] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:41:00] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:41:27] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:41:48] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:46:29] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:46:44] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:47:15] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 14:47:27] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 15:00:02] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 15:00:13] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
+[2025-10-24 15:00:36] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 15:00:45] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-24 15:01:40] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
+[2025-10-24 15:03:13] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
+[2025-10-24 15:03:21] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
