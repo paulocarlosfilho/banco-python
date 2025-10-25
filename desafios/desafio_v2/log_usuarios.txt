@@ -1,0 +1,1 @@
+[2025-10-25 15:29:48] Função 'exibir_extrato' executada com argumentos ([],) e {}. Retornou None
