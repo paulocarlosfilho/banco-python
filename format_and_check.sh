@@ -22,6 +22,7 @@ echo "--- LIMPEZA DE CÓDIGO CONCLUÍDA! ---"
 
 
 
+# pip inastall flake8 black isort
 
 # flake8 --max-line-length=120 nomedoarquivo.py
 # black -l 120 nomedoarquivo.py
