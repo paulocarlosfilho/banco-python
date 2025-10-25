@@ -1,4 +1,3 @@
-import csv
 import functools
 import textwrap
 import pickle
@@ -8,28 +7,35 @@ from pathlib import Path
 
 # --- CONFIGURAÇÃO DE CAMINHOS E ARQUIVOS ---
 ROOT_PATH = Path(__file__).parent
-DATA_FILE = ROOT_PATH / "dados_banco.pkl" 
-LOG_FILE = ROOT_PATH / "log_usuarios.txt" 
+DATA_FILE = ROOT_PATH / "dados_banco.pkl"
+LOG_FILE = ROOT_PATH / "log_usuarios.txt"
 
 
 # --- DECORATORS ---
 def log_transacao(func):
-    """Decorator para registrar a execução de funções de transação em log_usuarios.txt,
+    """Decorator para registrar a execução de funções
+    de transação em log_usuarios.txt,
     incluindo o saldo anterior se fornecido via kwargs.
     """
+
     @functools.wraps(func)
     def envelope(*args, **kwargs):
-        
-        # 1. Tenta extrair o saldo_anterior dos kwargs. pop() remove o item, 
+
+        # 1. Tenta extrair o saldo_anterior dos kwargs. pop() remove o item,
         #    deixando os kwargs limpos para a chamada da função original.
-        saldo_anterior = kwargs.pop('saldo_anterior', None) 
-        
-        # 2. Executa a função original (agora sem o 'saldo_anterior' nos kwargs)
+        saldo_anterior = kwargs.pop("saldo_anterior", None)
+
+        # 2. Executa a função original (agora sem o 'saldo_anterior'
+        #  nos kwargs)
         resultado = func(*args, **kwargs)
         data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
+
         # 3. Formata a string do saldo
-        saldo_log = f"Saldo Anterior: R$ {saldo_anterior:.2f}. " if saldo_anterior is not None else ""
+        saldo_log = (
+            f"Saldo Anterior: R$ {saldo_anterior:.2f}. "
+            if saldo_anterior is not None
+            else ""
+        )
 
         # 4. Registra no arquivo (log_usuarios.txt)
         with open(LOG_FILE, "a") as arquivo:
@@ -167,7 +173,11 @@ class ContaCorrente(Conta):
 
     def sacar(self, valor):
         numero_saques = len(
-            [transacao for transacao in self.historico.transacoes if transacao["tipo"] == Saque.__name__]
+            [
+                transacao
+                for transacao in self.historico.transacoes
+                if transacao["tipo"] == Saque.__name__
+            ]
         )
 
         excedeu_limite = valor > self._limite
@@ -214,14 +224,19 @@ class Historico:
 
     def gerar_relatorio(self, tipo_transacao=None):
         for transacao in self._transacoes:
-            if tipo_transacao is None or transacao["tipo"].lower() == tipo_transacao.lower():
+            if (
+                tipo_transacao is None
+                or transacao["tipo"].lower() == tipo_transacao.lower()
+            ):
                 yield transacao
 
     def transacoes_do_dia(self):
         data_atual = datetime.now().date()
         transacoes = []
         for transacao in self._transacoes:
-            data_transacao = datetime.strptime(transacao["data"], "%d-%m-%Y %H:%M:%S").date()
+            data_transacao = datetime.strptime(
+                transacao["data"], "%d-%m-%Y %H:%M:%S"
+            ).date()
             if data_atual == data_transacao:
                 transacoes.append(transacao)
         return transacoes
@@ -270,6 +285,7 @@ class Deposito(Transacao):
 
 # --- FUNÇÕES DE PERSISTÊNCIA ---
 
+
 def carregar_dados():
     """Carrega os objetos 'clientes' e 'contas' de um arquivo .pkl (pickle)."""
     if not DATA_FILE.exists():
@@ -284,6 +300,7 @@ def carregar_dados():
         print(f"\n@@@ Erro ao carregar dados ({e}). Iniciando com dados vazios. @@@")
         return [], []
 
+
 def salvar_dados(clientes, contas):
     """Salva os objetos 'clientes' e 'contas' em um arquivo .pkl (pickle)."""
     try:
@@ -295,6 +312,7 @@ def salvar_dados(clientes, contas):
 
 
 # --- FUNÇÕES UTILITÁRIAS ---
+
 
 def menu():
     menu = """\n
@@ -326,6 +344,7 @@ def recuperar_conta_cliente(cliente):
 
 # --- FUNÇÕES PRINCIPAIS (COM DECORATOR) ---
 
+
 @log_transacao
 def depositar(clientes):
     cpf = input("Informe o CPF do cliente: ")
@@ -342,13 +361,15 @@ def depositar(clientes):
     if not conta:
         return
 
-    # NOVIDADE: Chama a função original e passa o saldo anterior para o decorator via kwargs
-    saldo_anterior = conta.saldo # Captura o saldo antes da transação
-    
+    # NOVIDADE: Chama a função original e passa o
+    #  saldo anterior para o decorator via kwargs
+    saldo_anterior = conta.saldo  # Captura o saldo antes da transação
+
     # Realiza a transação (o decorator irá envolvê-la)
     cliente.realizar_transacao(conta, transacao)
-    
-    # Retorna o saldo para o decorator (Envelope). O decorator pegará o saldo_anterior
+
+    # Retorna o saldo para o decorator (Envelope).
+    #  O decorator pegará o saldo_anterior
     # da própria função e usará no log.
     return {"saldo_anterior": saldo_anterior}
 
@@ -369,13 +390,15 @@ def sacar(clientes):
     if not conta:
         return
 
-    # NOVIDADE: Chama a função original e passa o saldo anterior para o decorator via kwargs
-    saldo_anterior = conta.saldo # Captura o saldo antes da transação
-    
+    # NOVIDADE: Chama a função original e passa 
+    # o saldo anterior para o decorator via kwargs
+    saldo_anterior = conta.saldo  # Captura o saldo antes da transação
+
     # Realiza a transação (o decorator irá envolvê-la)
     cliente.realizar_transacao(conta, transacao)
-    
-    # Retorna o saldo para o decorator (Envelope). O decorator pegará o saldo_anterior
+
+    # Retorna o saldo para o decorator (Envelope).
+    #  O decorator pegará o saldo_anterior
     # da própria função e usará no log.
     return {"saldo_anterior": saldo_anterior}
 
@@ -406,9 +429,9 @@ def exibir_extrato(clientes):
     print(extrato)
     print(f"\nSaldo:\n\tR$ {conta.saldo:.2f}")
     print("==========================================")
-    
+
     # Retorno padrão para Extrato (não precisa de saldo anterior)
-    return None 
+    return None
 
 
 @log_transacao
@@ -422,9 +445,13 @@ def criar_cliente(clientes):
 
     nome = input("Informe o nome completo: ")
     data_nascimento = input("Informe a data de nascimento (dd-mm-aaaa): ")
-    endereco = input("Informe o endereço (logradouro, nro - bairro - cidade/sigla estado): ")
+    endereco = input(
+        "Informe o endereço (logradouro, nro - bairro - cidade/sigla estado): "
+    )
 
-    cliente = PessoaFisica(nome=nome, data_nascimento=data_nascimento, cpf=cpf, endereco=endereco)
+    cliente = PessoaFisica(
+        nome=nome, data_nascimento=data_nascimento, cpf=cpf, endereco=endereco
+    )
 
     clientes.append(cliente)
 
@@ -442,7 +469,9 @@ def criar_conta(numero_conta, clientes, contas):
         return
 
     # Aumentando o limite para 2500 para evitar o erro do saque de 2000
-    conta = ContaCorrente.nova_conta(cliente=cliente, numero=numero_conta, limite=2500, limite_saques=50) 
+    conta = ContaCorrente.nova_conta(
+        cliente=cliente, numero=numero_conta, limite=2500, limite_saques=50
+    )
     contas.append(conta)
     cliente.adicionar_conta(conta)
 
@@ -459,9 +488,9 @@ def listar_contas(contas):
 def main():
     # 1. Carregar Dados ao Iniciar
     clientes, contas = carregar_dados()
-    
+
     # 2. Corrigir o número da próxima conta
-    numero_conta = len(contas) + 1 
+    numero_conta = len(contas) + 1
 
     while True:
         opcao = menu()
@@ -480,18 +509,20 @@ def main():
 
         elif opcao == "nc":
             criar_conta(numero_conta, clientes, contas)
-            numero_conta += 1 
+            numero_conta += 1
 
         elif opcao == "lc":
             listar_contas(contas)
 
         elif opcao == "q":
             # 3. Salvar Dados ao Sair
-            salvar_dados(clientes, contas) 
+            salvar_dados(clientes, contas)
             break
 
         else:
-            print("\n@@@ Operação inválida, por favor selecione novamente a operação desejada. @@@")
+            print(
+                "\n@@@ Operação inválida, por favor selecione novamente a operação desejada. @@@"
+            )
 
 
 if __name__ == "__main__":

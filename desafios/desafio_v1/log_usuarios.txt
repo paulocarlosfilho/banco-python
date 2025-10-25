@@ -16,3 +16,6 @@
 [2025-10-24 15:01:40] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
 [2025-10-24 15:03:13] Função 'depositar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
 [2025-10-24 15:03:21] Função 'sacar' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou {'saldo_anterior': 4800.0}
+[2025-10-25 08:46:25] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-25 11:05:23] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
+[2025-10-25 12:49:01] Função 'exibir_extrato' executada com argumentos ([<PessoaFisica: ('1234')>],) e {}. Retornou None
